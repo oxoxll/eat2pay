@@ -1,0 +1,57 @@
+<html ng-app="clearingApp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>吃饭给钱</title>
+    <link href="/clearing/static/css/creator.css" rel="stylesheet" type="text/css">
+</head>
+
+<body ng-controller="clearingCtrl">
+
+<h1>添加菜单</h1>
+
+<h3>1.总金额</h3>
+<input type="text" ng-model="order.total_money">
+
+
+<h3>2.付款人</h3>
+<div ng-repeat="member in member_list" >
+    <input type="radio" class="radio" ng-model="payer_id">{{member.member_name}}<br/>
+</div>
+
+
+<h3>3、订单详情</h3>
+<div class="account_div">
+    <div id="title">
+        <div class="col-xs-4 tablehead" >会员</div>
+        <div class="col-xs-4 tablehead">密码</div>
+        <div class="col-xs-4 tablehead">状态</div>
+    </div>
+    <div class="row tablebody" ng-repeat="member in member_list">
+        <input type="checkbox" class="checkbox" ng-model="member_id" ng-click="check(chk)" >{{member.member_name}}
+        <input type="text" ng-model="money">
+        <input tpye="text" ng-model="note">
+    </div>
+</div>
+
+
+<h3>4、确认提交订单</h3>
+<!--执行表单数据检查，无误则显示下面的提交订单按钮-->
+<button ng-click="confirm_order()">保存订单信息</button><br/>
+
+<!--确认提交按钮默认隐藏，点上面的“确认信息”，confirm_order做完信息验证后显示-->
+<button ng-show="confirmed" ng-click="add_order()">提交订单</button><br/>
+
+
+
+
+<h1>历史记录</h1>
+<button ng-show="confirm" ng-click="show_order()">提交订单</button><br/>
+
+
+
+
+
+<script src="../static/js/angular.min.js"></script>
+<script src="../static/js/controller.js"></script>
+</body>
+</html>
